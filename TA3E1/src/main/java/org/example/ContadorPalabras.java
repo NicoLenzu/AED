@@ -3,6 +3,15 @@ package org.example;
 public class ContadorPalabras {
     public ContadorPalabras() {}
 
+    /*
+     * Este método `contadorPalabras` cuenta la cantidad de palabras en un texto.
+     * Primero verifica si el carácter actual es una letra. Si es así, marca la palabra
+     * como verdadera. Luego, si encuentra un espacio o llega al final del texto, aumenta
+     * el contador de palabras y marca la palabra como falsa.
+     * 
+     * Valor de retorno:
+     * contador : Devuelve el número total de palabras en el texto.
+     */ 
     public int contadorPalabras(String texto) {
         boolean palabra = false;
         int contador = 0;
