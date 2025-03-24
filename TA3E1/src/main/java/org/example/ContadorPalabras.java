@@ -71,7 +71,6 @@ public class ContadorPalabras {
         return contadorPalabras;
     }
     public int contadorVocales(String texto){
-        boolean palabra = false;
         int contadorVocales = 0;
         String vocales = "aeiouáéíóú";
 
@@ -89,7 +88,6 @@ public class ContadorPalabras {
 
 
     public int contadorConsonantes(String texto) {
-        boolean palabra = false;
         int contadorConsonantes = 0;
         String consonantes = "qwrtypsdfghjklzxcvbnm";
 
