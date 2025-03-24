@@ -1,0 +1,5 @@
+a) No se cambia el nombre del alumno por lo que siempre sera null
+b) El for empieza con indice 1 y los indices empiezan en 0, por lo que se estaria salteando el primer caracter
+c) El indice 8 no existe el vector determinado, y ademas la forma de declarar el vector no es la mas adecuada
+d) El parametro que se le pasa no es utilizado, y tampoco se accede al primer caracter como el nombre lo indica.
+e) Deberia llamar al metodo valueOf de la clase Integer y no crear una instancia de Integer
