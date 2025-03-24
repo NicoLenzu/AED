@@ -1,6 +1,10 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContadorPalabras {
+    
     public ContadorPalabras() {}
 
     /*
@@ -65,6 +69,24 @@ public class ContadorPalabras {
             }
         }
         return contadorPalabras;
+    }
+
+    /*
+     * Este método `palabrasComunes` compara dos arreglos de palabras y devuelve un arreglo
+     * con las palabras que se encuentran en ambos arreglos.
+     * Valor de retorno:
+     * palabrasComunesList : Devuelve un arreglo con las palabras comunes entre los dos arreglos.
+     */
+    public String[] palabrasComunes(String[] palabras1, String[] palabras2) {
+        List<String> palabrasComunesList = new ArrayList<>();
+        for (int i = 0; i < palabras1.length; i++) {
+            for (int j = 0; j < palabras2.length; j++) {
+                if (palabras1[i].equals(palabras2[j])) {
+                    palabrasComunesList.add(palabras1[i]);
+                }
+            }
+        }
+        return palabrasComunesList.toArray(new String[0]);
     }
 }
 
