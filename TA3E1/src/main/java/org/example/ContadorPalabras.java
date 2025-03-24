@@ -70,8 +70,43 @@ public class ContadorPalabras {
         }
         return contadorPalabras;
     }
+    public int contadorVocales(String texto){
+        boolean palabra = false;
+        int contadorVocales = 0;
+        String vocales = "aeiouáéíóú";
 
-    /*
+        String textoMin = texto.toLowerCase();
+        for (int i = 0; i < textoMin.length(); i++) {
+            char letra = textoMin.charAt(i);
+
+            String letraString = Character.toString(letra);
+            if(vocales.contains(letraString)){
+                contadorVocales++;
+            }
+        }
+        return contadorVocales;
+    }
+
+
+    public int contadorConsonantes(String texto) {
+        boolean palabra = false;
+        int contadorConsonantes = 0;
+        String consonantes = "qwrtypsdfghjklzxcvbnm";
+
+        String textoMin = texto.toLowerCase();
+        for (int i = 0; i < textoMin.length(); i++) {
+            char letra = textoMin.charAt(i);
+
+            String letraString = Character.toString(letra);
+            if (consonantes.contains(letraString)) {
+                contadorConsonantes++;
+            }
+        }
+        return contadorConsonantes;
+    }
+
+
+            /*
      * Este método `palabrasComunes` compara dos arreglos de palabras y devuelve un arreglo
      * con las palabras que se encuentran en ambos arreglos.
      * Valor de retorno:
