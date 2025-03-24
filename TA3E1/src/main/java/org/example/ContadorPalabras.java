@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
 
 public class ContadorPalabras {
     
@@ -87,39 +88,67 @@ public class ContadorPalabras {
     }
 
 
-    public int contadorConsonantes(String texto) {
-        int contadorConsonantes = 0;
-        String consonantes = "qwrtypsdfghjklzxcvbnm";
+        public int contadorConsonantes(String texto) {
+            int contadorConsonantes = 0;
+            String consonantes = "qwrtypsdfghjklzxcvbnm";
 
-        String textoMin = texto.toLowerCase();
-        for (int i = 0; i < textoMin.length(); i++) {
-            char letra = textoMin.charAt(i);
+            String textoMin = texto.toLowerCase();
+            for (int i = 0; i < textoMin.length(); i++) {
+                char letra = textoMin.charAt(i);
 
-            String letraString = Character.toString(letra);
-            if (consonantes.contains(letraString)) {
-                contadorConsonantes++;
-            }
-        }
-        return contadorConsonantes;
-    }
-
-
-            /*
-     * Este método `palabrasComunes` compara dos arreglos de palabras y devuelve un arreglo
-     * con las palabras que se encuentran en ambos arreglos.
-     * Valor de retorno:
-     * palabrasComunesList : Devuelve un arreglo con las palabras comunes entre los dos arreglos.
-     */
-    public String[] palabrasComunes(String[] palabras1, String[] palabras2) {
-        List<String> palabrasComunesList = new ArrayList<>();
-        for (int i = 0; i < palabras1.length; i++) {
-            for (int j = 0; j < palabras2.length; j++) {
-                if (palabras1[i].equals(palabras2[j])) {
-                    palabrasComunesList.add(palabras1[i]);
+                String letraString = Character.toString(letra);
+                if (consonantes.contains(letraString)) {
+                    contadorConsonantes++;
                 }
             }
+            return contadorConsonantes;
         }
-        return palabrasComunesList.toArray(new String[0]);
-    }
+
+
+                /*
+        * Este método `palabrasComunes` compara dos arreglos de palabras y devuelve un arreglo
+        * con las palabras que se encuentran en ambos arreglos.
+        * Valor de retorno:
+        * palabrasComunesList : Devuelve un arreglo con las palabras comunes entre los dos arreglos.
+        */
+        public String[] palabrasComunes(String[] palabras1, String[] palabras2) {
+            List<String> palabrasComunesList = new ArrayList<>();
+            for (int i = 0; i < palabras1.length; i++) {
+                for (int j = 0; j < palabras2.length; j++) {
+                    if (palabras1[i].equals(palabras2[j])) {
+                        palabrasComunesList.add(palabras1[i]);
+                    }
+                }
+            }
+            return palabrasComunesList.toArray(new String[0]);
+        }
+        public List<String> leerArchivo(String nombreCompletoArchivo){
+            List<String> lineas = new ArrayList<String>();
+            try {
+                File archivo = new File (nombreCompletoArchivo);
+                FileReader fr = new FileReader(archivo);
+                BufferedReader br = new BufferedReader (fr);
+                String linea = br.readLine();
+                while (linea != null) {
+                    lineas.add(linea);
+                    linea = br.readLine();
+                }
+                br.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println(lineas.size());
+            return lineas;
+        } 
+        public int cantPalabras (List<String> lineasArchivo){
+            int contador = 0;
+            for (String linea : lineasArchivo) {
+                contador += contadorPalabras(linea);
+            }
+            return contador;
+        }
 }
 

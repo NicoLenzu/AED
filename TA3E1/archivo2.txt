@@ -1,0 +1,23 @@
+La intención primaria del curso “Algoritmos y Estructuras de Datos” es desarrollar las capacidades de
+analizar, seleccionar y aplicar en forma práctica conceptos de análisis de algoritmos y estructuras de
+datos básicas para la resolución de problemas mediante aplicaciones de software.
+Se utilizará en este curso un lenguaje de programación y herramientas muy difundidas en la
+comunidad de desarrollo de software, procurando alcanzar niveles de destrezas satisfactorios (de
+acuerdo a los requerimientos de la industria) en el manejo de las mismas, así como buenas prácticas
+de programación de aplicaciones de software de acuerdo a los estándares globales de la disciplina.
+Es también una intención de este curso el contribuir a desarrollar valores y habilidades para el trabajo
+en equipo, la responsabilidad por el aprendizaje propio, la capacidad de resolución de problemas, el
+pensamiento crítico, la comunicación efectiva y el aprendizaje permanente.
+El curso se desarrollará en varias Unidades Temáticas que se enfocan en diferentes tópicos y que,
+actuando coordinadamente, propenden al logro de los objetivos y resultados de aprendizaje
+esperados globales del mismo.
+Para ello cada unidad temática describe las intenciones y los resultados esperados del aprendizaje
+específicos de la Unidad. Estos se encuentran publicados en las secciones correspondientes de la
+webasignatura. 
+Como estudiante, se espera que comprendas estos resultados esperados del aprendizaje, trabajes
+para alcanzarlos y reflexiones sobre el proceso a fin de mejorar continuamente: serás el protagonista
+activo de tu propio aprendizaje. Para aprender a sistematizar esta reflexión y desarrollar las
+capacidades de pensamiento crítico, resolución de problemas y de aprendizaje auto-dirigido, se te
+pedirá que desarrolles y mantengas un portafolio con las reflexiones y experiencias de aprendizaje,
+que también entregarás al final del curso y sobre el cual podrás consultar continuamente con los
+profesores. 

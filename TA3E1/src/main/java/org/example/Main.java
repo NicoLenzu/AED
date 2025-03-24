@@ -10,6 +10,9 @@ public class Main {
         }
         System.out.println(contador.contadorVocales("Hola Mundo"));
         System.out.println(contador.contadorConsonantes("Hola Mundo"));
-        }   
+        System.out.println(contador.leerArchivo("C:/AED/AED/TA3E1/archivo1.txt"));
+        System.out.println(contador.cantPalabras(contador.leerArchivo("C:/AED/AED/TA3E1/archivo1.txt")));    
+    }   
+        
 
 }
