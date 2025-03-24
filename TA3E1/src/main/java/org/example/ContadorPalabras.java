@@ -18,7 +18,23 @@ public class ContadorPalabras {
         return contador;
     }
 
-    public int cantidadMayorX(String texto, int caracteres){
+    /*
+    Este método `cantidadMayorX` cuenta la cantidad de palabras en un texto que tienen exactamente
+    la cantidad de caracteres especificada por el parámetro `caracteres`.
+
+    El método recorre el texto carácter por carácter y mantiene un contador para determinar
+    el número de caracteres de la palabra actual. Si encuentra una palabra con exactamente
+    la cantidad requerida de caracteres, aumenta un contador y marca la palabra como contada.
+    Se reinician los contadores al final de cada palabra para continuar con la siguiente.
+
+    Parámetros:
+    - `texto`: representa la cadena de texto que se analizará.
+    - `caracteres`: número exacto de caracteres que se verificará en cada palabra.
+
+    Valor de retorno:
+    Devuelve el número total de palabras con exactamente la cantidad especificada de caracteres.
+     */
+    public int cantidadMayorX(String texto, int caracteres) {
         boolean palabra = false;
         boolean contado = false;
         int contadorPalabras = 0;
