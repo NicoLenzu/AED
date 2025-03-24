@@ -9,7 +9,7 @@ public class Main {
             System.out.println(palabra);
         }
         System.out.println(contador.contadorVocales("Hola Mundo"));
-        System.out.println(contador.contadorVocales("Hola Mundo"));
+        System.out.println(contador.contadorConsonantes("Hola Mundo"));
         }   
 
 }
