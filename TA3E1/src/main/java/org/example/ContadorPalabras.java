@@ -122,6 +122,13 @@ public class ContadorPalabras {
             }
             return palabrasComunesList.toArray(new String[0]);
         }
+        
+        
+        /*
+         * Este método `leerArchivo` lee un archivo de texto y devuelve una lista con las líneas del archivo.
+         * Valor de retorno: Devuelve una lista con las líneas del archivo. Además, imprime la cantidad de líneas
+         * que se han leído.
+         */
         public List<String> leerArchivo(String nombreCompletoArchivo){
             List<String> lineas = new ArrayList<String>();
             try {
@@ -135,20 +142,27 @@ public class ContadorPalabras {
                 }
                 br.close();
             } catch (FileNotFoundException e) {
+                System.out.println("Error al leer el archivo "+nombreCompletoArchivo); // Imprime un mensaje de error si no se encuentra el archivo.
                 e.printStackTrace();
             } catch (IOException e) {
+                System.out.println("Error al leer el archivo "+nombreCompletoArchivo);
                 e.printStackTrace();
             }
 
-            System.out.println(lineas.size());
-            return lineas;
+            System.out.println(lineas.size()); // Imprime la cantidad de líneas que se han leído.
+            return lineas; // Devuelve una lista con las líneas del archivo.
         } 
+
+        /*
+         * Este método `cantPalabras` cuenta la cantidad de palabras en un archivo de texto.
+         * Valor de retorno: Devuelve la cantidad total de palabras en el archivo.
+         */
         public int cantPalabras (List<String> lineasArchivo){
             int contador = 0;
             for (String linea : lineasArchivo) {
-                contador += contadorPalabras(linea);
+                contador += contadorPalabras(linea); // Llama al método contadorPalabras para contar las palabras en cada línea.
             }
-            return contador;
+            return contador; // Devuelve la cantidad total de palabras en el archivo.
         }
 }
 
