@@ -24,8 +24,6 @@ public class Main {
 
         System.out.println(lista.buscar(3).getDato());
 
-        lista.eliminar(3);
-
         System.out.println(lista.imprimir());
     }
 }

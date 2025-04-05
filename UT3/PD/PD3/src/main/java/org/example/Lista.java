@@ -14,16 +14,16 @@ public class Lista implements ILista{
         cantElementos++;
     }
 
+    // No se si deberia colocar un nuevo nodo antes del de la etiqueta o reemplazarlo
     @Override
     public void insertar(Comparable etiqueta, Object dato) {
         Nodo actual = primero;
-        while (actual != null){
-            if (actual.getEtiqueta().equals(etiqueta)) {
-                actual.setDato(dato);
-                break;
-            }
+        while (actual.getSiguiente().compareTo(etiqueta) != 0 && actual.getSiguiente() != null){
             actual = actual.getSiguiente();
         }
+        Nodo Nuevo = new Nodo(etiqueta, dato);
+        Nuevo.setSiguiente(actual.getSiguiente().getSiguiente());
+        actual.setSiguiente(Nuevo);
     }
 
     @Override
