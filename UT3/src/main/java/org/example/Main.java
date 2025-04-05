@@ -3,7 +3,8 @@ package org.example;
 public class Main {
     public static void main(String[] args) {
         // Instanciando el supermercado
-        Supermarket supermarket = new Supermarket();
+        Supermarket supermarketASD = new Supermarket();
+        SupermarketLinkedList supermarket = new SupermarketLinkedList();
 
         // Creando productos de ejemplo
         Product product1 = new Product("Manzanas", "001", 1.5f);
