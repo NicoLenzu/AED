@@ -1,0 +1,28 @@
+Diagrama para formar el arbol
+Recorrido inorder en horizontal, de izq a der
+Recorrido Posorder en vertical, de abajo a arriba
+
+    R A T B J S M C W Z X F
+S             S
+M               M
+X                       X
+F                         F
+W                   W
+Z                      Z
+C                 C
+T       T
+J           J
+B         B
+A     A
+R   R
+
+Arbol formado
+                S
+               / \
+              T   M
+             / \   \
+            A   J   X
+           /   /   / \
+          R   B   W   F
+                 / \
+                C   Z

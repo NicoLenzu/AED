@@ -1,0 +1,21 @@
+Diagrama para formar el arbol
+Recorrido inorder en horizontal, de izq a der
+Recorrido preorder en vertical, de arriba a abajo
+
+    F B A D C G E
+A       A
+B     B
+F   F
+C           C
+D         D
+E               E
+G             G
+
+Arbol formado
+        A
+       / \
+      B   C
+     /   / \
+    F    D  E
+           /
+          G
