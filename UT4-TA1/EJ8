@@ -1,0 +1,17 @@
+Representa la siguiente expresión aritmética utilizando un árbol binario:
+a - (b * (c + d / (f + g)) + h * (i - j * (k + l)))
+
+Si recorremos el siguiente arbol con un recorrido Inorder obtendremos la expresion anterior
+      +
+   /     \
+  -       *
+ / \     / \
+a  *    h   -
+  / \      / \
+  b  +    i   *
+    / \      / \
+   c   %    j   +
+      / \      / \
+     d   +    k   l
+        / \
+       f   g
