@@ -1,0 +1,3 @@
+PREORDER: X, B, A, J, R, T, M, S, W, C, Z, F
+POSTORDER: R, T, J, A, B, C, F, Z, W, S, M, X
+INORDER: A, R, J, T, B, X, M, S, C, W, F, Z
