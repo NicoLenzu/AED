@@ -90,5 +90,26 @@ public class NodoArbol<T> {
 
 
     }
+    public void inOrder(NodoArbol<T> nodoAct){
+        if (nodoAct != null) {
+            inOrder(nodoAct.getIzq());
+            System.out.println(nodoAct.getDato());
+            inOrder(nodoAct.getDer());
+        }
+    }
+    public void preOrder(NodoArbol<T> nodoAct){
+        if (nodoAct != null) {
+            System.out.println(nodoAct.getDato());
+            preOrder(nodoAct.getIzq());
+            preOrder(nodoAct.getDer());
+        }
+    }
+    public void postOrder(NodoArbol<T> nodoAct){
+        if (nodoAct != null) {
+            postOrder(nodoAct.getIzq());
+            postOrder(nodoAct.getDer());
+            System.out.println(nodoAct.getDato());
+        }
+    }
 
 }
