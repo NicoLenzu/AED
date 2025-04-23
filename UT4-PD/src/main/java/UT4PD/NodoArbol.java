@@ -111,5 +111,21 @@ public class NodoArbol<T> {
             System.out.println(nodoAct.getDato());
         }
     }
+    public int evalExpr(NodoArbol<T> NodoAct){
+        if (NodoAct.esHoja()){
+            return (int)NodoAct.getDato();
+        }
+        else{
+            int x = evalExpr(NodoAct.getIzq());
+            int y = evalExpr(NodoAct.getDer());
+            return switch ((String) NodoAct.getDato()) {
+                case "*" -> x * y;
+                case "/" -> x / y;
+                case "+" -> x + y;
+                case "-" -> x - y;
+                default -> 0;
+            };
+        }
+    }
 
 }
