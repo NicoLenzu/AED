@@ -2,16 +2,34 @@ Representa la siguiente expresión aritmética utilizando un árbol binario:
 a - (b * (c + d / (f + g)) + h * (i - j * (k + l)))
 
 Si recorremos el siguiente arbol con un recorrido Inorder obtendremos la expresion anterior
-      +
-   /     \
-  -       *
- / \     / \
-a  *    h   -
-  / \      / \
-  b  +    i   *
-    / \      / \
-   c   %    j   +
-      / \      / \
-     d   +    k   l
-        / \
-       f   g
+
+            -
+          /   \
+        a       +
+              /   \
+            *       *
+          /   \    /   \
+        b       + h       -
+              /   \      /   \
+            c       /   i       *
+                  /   \        /   \
+                d       +    j       +
+                      /   \        /   \
+                    f       g    k       l
+
+public int evalExpr(NodoArbol<T> NodoAct){
+        if (NodoAct.esHoja()){
+            return (int)NodoAct.getDato();
+        }
+        else{
+            int x = evalExpr(NodoAct.getIzq());
+            int y = evalExpr(NodoAct.getDer());
+            return switch ((String) NodoAct.getDato()) {
+                case "*" -> x * y;
+                case "/" -> x / y;
+                case "+" -> x + y;
+                case "-" -> x - y;
+                default -> 0;
+            };
+}
+}

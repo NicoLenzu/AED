@@ -1,0 +1,19 @@
+Dada la siguiente lista de claves, insértelas en un ÁRBOL BINARIO DE BÚSQUEDA, siguiendo el
+seudocódigo de inserción indicado en material de lectura “arboles_binarios.pdf”.
+
+T,Y,U,P,L,K,J,S,A,Z,X,C,V,N
+
+                            T
+                          /   \
+                        P       Y
+                      /   \    /  \
+                    L       S U     Z
+                  /   \        \
+                K       N        X
+              /                /
+            J                 V
+          /
+        A
+          \
+            C
+
