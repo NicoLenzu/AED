@@ -12,13 +12,24 @@ public class ArbolBinarioBusqueda<T> {
         if (nodoAct == null) {
             return nodoIns; // Si el nodo actual es null, este pasa a ser el nuevo nodo.
         }
-        if (nodoIns.getId().compareTo(nodoAct.getDato()) > 0) {
+        if (nodoIns.getId().compareTo((T) nodoAct.getId()) > 0) {
             nodoAct.setDer(insertar(nodoAct.getDer(), nodoIns)); // Actualizamos la derecha
-        } else if (nodoIns.getId().compareTo(nodoAct.getDato()) < 0) {
+        } else if (nodoIns.getId().compareTo((T) nodoAct.getId()) < 0) {
             nodoAct.setIzq(insertar(nodoAct.getIzq(), nodoIns)); // Actualizamos la izquierda
         }
         return nodoAct; // Retornamos el nodo actualizado.
     }
+    public boolean esVacio() {
+        return raiz == null;
+    }
+    public void eliminar(Comparable unaEtiqueta) {
+        if (esVacio()){
+            return;
+        }
+        raiz.eliminar(unaEtiqueta);
+
+    }
+
 
 
 
