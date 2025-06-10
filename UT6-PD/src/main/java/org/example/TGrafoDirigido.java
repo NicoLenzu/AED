@@ -147,7 +147,59 @@ public class TGrafoDirigido implements IGrafoDirigido {
 
     @Override
     public Double[][] floyd() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // Obtener las etiquetas ordenadas para tener un índice consistente
+
+        Object[] etiquetas = getVertices().keySet().toArray();
+        int n = etiquetas.length;
+        Double[][] dist = new Double[n][n];
+
+        // Inicializar la matriz de distancias
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == j) {
+                    dist[i][j] = 0.0; // Distancia de un vértice a sí mismo es 0
+                } else {
+                    // Buscar si existe arista directa entre los vértices
+                    Comparable etiquetaOrigen = (Comparable) etiquetas[i];
+                    Comparable etiquetaDestino = (Comparable) etiquetas[j];
+
+                    TVertice verticeOrigen = buscarVertice(etiquetaOrigen);
+
+                    if (verticeOrigen != null) {
+                        TVertice verticeDestino = buscarVertice(etiquetaDestino);
+                        if (verticeDestino != null) {
+                            dist[i][j] = verticeOrigen.obtenerCostoAdyacencia(verticeDestino);
+
+                        } else {
+                            dist[i][j] = Double.MAX_VALUE;
+                        }
+                    } else {
+                        dist[i][j] = Double.MAX_VALUE;
+                    }
+                }
+            }
+        }
+
+        // Algoritmo principal de Floyd-Warshall: k es el vértice intermedio
+        for (int k = 0; k < n; k++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    // Si hay un camino más corto pasando por k
+                    if (dist[i][k] != Double.MAX_VALUE &&
+                            dist[k][j] != Double.MAX_VALUE &&
+                            (dist[i][k] + dist[k][j]) < dist[i][j]) {
+
+
+                        double nuevaDistancia = dist[i][k] + dist[k][j];
+
+                        dist[i][j] = nuevaDistancia;
+
+                    }
+                }
+            }
+        }
+
+        return dist;
     }
 
     @Override
