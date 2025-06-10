@@ -1,11 +1,17 @@
 package org.example;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 public class Persona {
     public String nombre;
     public Persona izq;
     public Persona der;
+    public Comparable<String> apellido;
+
 
     public Persona(String nombre) {
         this.nombre = nombre;
