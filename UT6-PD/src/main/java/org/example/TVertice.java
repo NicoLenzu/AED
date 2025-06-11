@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class TVertice<T> implements IVertice {
 
     private final Comparable etiqueta;
-    private LinkedList<TAdyacencia> adyacentes;
+    private LinkedList<IAdyacencia> adyacentes;
     private boolean visitado;
     private T datos;
 
@@ -13,8 +13,7 @@ public class TVertice<T> implements IVertice {
         return etiqueta;
     }
 
-    @Override
-    public LinkedList<TAdyacencia> getAdyacentes() {
+    public LinkedList<IAdyacencia> getAdyacentes() {
         return adyacentes;
     }
 
@@ -33,7 +32,7 @@ public class TVertice<T> implements IVertice {
     }
 
     @Override
-    public TAdyacencia buscarAdyacencia(TVertice verticeDestino) {
+    public IAdyacencia buscarAdyacencia(IVertice verticeDestino) {
         if (verticeDestino != null) {
             return buscarAdyacencia(verticeDestino.getEtiqueta());
         }
@@ -41,8 +40,8 @@ public class TVertice<T> implements IVertice {
     }
 
     @Override
-    public Double obtenerCostoAdyacencia(TVertice verticeDestino) {
-        TAdyacencia ady = buscarAdyacencia(verticeDestino);
+    public Double obtenerCostoAdyacencia(IVertice verticeDestino) {
+        IAdyacencia ady = buscarAdyacencia(verticeDestino);
         if (ady != null) {
             return ady.getCosto();
         }
@@ -50,7 +49,7 @@ public class TVertice<T> implements IVertice {
     }
 
     @Override
-    public boolean insertarAdyacencia(Double costo, TVertice verticeDestino) {
+    public boolean insertarAdyacencia(Double costo, IVertice verticeDestino) {
         if (buscarAdyacencia(verticeDestino) == null) {
             TAdyacencia ady = new TAdyacencia(costo, verticeDestino);
             return adyacentes.add(ady);
@@ -60,7 +59,7 @@ public class TVertice<T> implements IVertice {
 
     @Override
     public boolean eliminarAdyacencia(Comparable nomVerticeDestino) {
-        TAdyacencia ady = buscarAdyacencia(nomVerticeDestino);
+        IAdyacencia ady = buscarAdyacencia(nomVerticeDestino);
         if (ady != null) {
             adyacentes.remove(ady);
             return true;
@@ -69,16 +68,15 @@ public class TVertice<T> implements IVertice {
     }
 
     @Override
-    public TVertice primerAdyacente() {
+    public IVertice primerAdyacente() {
         if (this.adyacentes.getFirst() != null) {
             return this.adyacentes.getFirst().getDestino();
         }
         return null;
     }
 
-    @Override
-    public TVertice siguienteAdyacente(TVertice w) {
-        TAdyacencia adyacente = buscarAdyacencia(w.getEtiqueta());
+    public IVertice siguienteAdyacente(IVertice w) {
+        IAdyacencia adyacente = buscarAdyacencia(w.getEtiqueta());
         int index = adyacentes.indexOf(adyacente);
         if (index + 1 < adyacentes.size()) {
             return adyacentes.get(index + 1).getDestino();
@@ -87,8 +85,8 @@ public class TVertice<T> implements IVertice {
     }
 
     @Override
-    public TAdyacencia buscarAdyacencia(Comparable etiquetaDestino) {
-        for (TAdyacencia adyacencia : adyacentes) {
+    public IAdyacencia buscarAdyacencia(Comparable etiquetaDestino) {
+        for (IAdyacencia adyacencia : adyacentes) {
             if (adyacencia.getDestino().getEtiqueta().compareTo(etiquetaDestino) == 0) {
                 return adyacencia;
             }

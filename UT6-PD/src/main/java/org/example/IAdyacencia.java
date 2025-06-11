@@ -6,7 +6,6 @@ package org.example;
  * and open the template in the editor.
  */
 
-
 /**
  *
  * @author Ernesto
@@ -15,8 +14,8 @@ public interface IAdyacencia {
 
     double getCosto();
 
-    TVertice getDestino();
+    IVertice getDestino();
 
     Comparable getEtiqueta();
-    
+
 }

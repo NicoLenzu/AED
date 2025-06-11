@@ -14,20 +14,28 @@ import java.util.LinkedList;
  */
 public interface IVertice {
 
-    TAdyacencia buscarAdyacencia(TVertice verticeDestino);
+    IAdyacencia buscarAdyacencia(IVertice verticeDestino);
 
-    TAdyacencia buscarAdyacencia(Comparable etiquetaDestino);
+    IAdyacencia buscarAdyacencia(Comparable etiquetaDestino);
 
     boolean eliminarAdyacencia(Comparable nomVerticeDestino);
 
-    LinkedList<TAdyacencia> getAdyacentes();
+    LinkedList<IAdyacencia> getAdyacentes();
 
-    boolean insertarAdyacencia(Double costo, TVertice verticeDestino);
+    Object getDatos();
 
-    Double obtenerCostoAdyacencia(TVertice verticeDestino);
+    Comparable getEtiqueta();
 
-    TVertice primerAdyacente();
+    boolean getVisitado();
 
-    TVertice siguienteAdyacente(TVertice w);
-    
+    boolean insertarAdyacencia(Double costo, IVertice verticeDestino);
+
+    Double obtenerCostoAdyacencia(IVertice verticeDestino);
+
+    IVertice primerAdyacente();
+
+    void setVisitado(boolean valor);
+
+
+
 }

@@ -1,20 +1,17 @@
 package org.example;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class TGrafoDirigido implements IGrafoDirigido {
 
-    private Map<Comparable, TVertice> vertices; // vertices del grafo.-
+    private Map<Comparable, IVertice> vertices; // vertices del grafo.-
 
-    public TGrafoDirigido(Collection<TVertice> vertices, Collection<TArista> aristas) {
+    public TGrafoDirigido(Collection<IVertice> vertices, Collection<IArista> aristas) {
         this.vertices = new HashMap<>();
-        for (TVertice vertice : vertices) {
+        for (IVertice vertice : vertices) {
             insertarVertice(vertice.getEtiqueta());
         }
-        for (TArista arista : aristas) {
+        for (IArista arista : aristas) {
             insertarArista(arista);
         }
     }
@@ -27,7 +24,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
      */
     public boolean eliminarArista(Comparable nomVerticeOrigen, Comparable nomVerticeDestino) {
         if ((nomVerticeOrigen != null) && (nomVerticeDestino != null)) {
-            TVertice vertOrigen = buscarVertice(nomVerticeOrigen);
+            IVertice vertOrigen = buscarVertice(nomVerticeOrigen);
             if (vertOrigen != null) {
                 return vertOrigen.eliminarAdyacencia(nomVerticeDestino);
             }
@@ -35,7 +32,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
         return false;
     }
 
-    
+
     /**
      * Metodo encargado de verificar la existencia de una arista. Las etiquetas
      * pasadas por par�metro deben ser v�lidas.
@@ -43,8 +40,8 @@ public class TGrafoDirigido implements IGrafoDirigido {
      * @return True si existe la adyacencia, false en caso contrario
      */
     public boolean existeArista(Comparable etiquetaOrigen, Comparable etiquetaDestino) {
-        TVertice vertOrigen = buscarVertice(etiquetaOrigen);
-        TVertice vertDestino = buscarVertice(etiquetaDestino);
+        IVertice vertOrigen = buscarVertice(etiquetaOrigen);
+        IVertice vertDestino = buscarVertice(etiquetaDestino);
         if ((vertOrigen != null) && (vertDestino != null)) {
             return vertOrigen.buscarAdyacencia(vertDestino) != null;
         }
@@ -73,7 +70,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
      * @param unaEtiqueta Etiqueta del vertice a buscar.-
      * @return El vertice encontrado. En caso de no existir, retorna nulo.
      */
-    private TVertice buscarVertice(Comparable unaEtiqueta) {
+    private IVertice buscarVertice(Comparable unaEtiqueta) {
         return getVertices().get(unaEtiqueta);
     }
 
@@ -88,10 +85,10 @@ public class TGrafoDirigido implements IGrafoDirigido {
      *
      * @return True si se pudo insertar la adyacencia, false en caso contrario
      */
-    public boolean insertarArista(TArista arista) {
+    public boolean insertarArista(IArista arista) {
         if ((arista.getEtiquetaOrigen() != null) && (arista.getEtiquetaDestino() != null)) {
-            TVertice vertOrigen = buscarVertice(arista.getEtiquetaOrigen());
-            TVertice vertDestino = buscarVertice(arista.getEtiquetaDestino());
+            IVertice vertOrigen = buscarVertice(arista.getEtiquetaOrigen());
+            IVertice vertDestino = buscarVertice(arista.getEtiquetaDestino());
             if ((vertOrigen != null) && (vertDestino != null)) {
                 return vertOrigen.insertarAdyacencia(arista.getCosto(), vertDestino);
             }
@@ -110,7 +107,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
      */
     public boolean insertarVertice(Comparable unaEtiqueta) {
         if ((unaEtiqueta != null) && (!existeVertice(unaEtiqueta))) {
-            TVertice vert = new TVertice(unaEtiqueta);
+            IVertice vert = new TVertice(unaEtiqueta);
             getVertices().put(unaEtiqueta, vert);
             return getVertices().containsKey(unaEtiqueta);
         }
@@ -118,8 +115,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
     }
 
     @Override
-
-    public boolean insertarVertice(TVertice vertice) {
+    public boolean insertarVertice(IVertice vertice) {
         Comparable unaEtiqueta = vertice.getEtiqueta();
         if ((unaEtiqueta != null) && (!existeVertice(unaEtiqueta))) {
             getVertices().put(unaEtiqueta, vertice);
@@ -129,85 +125,122 @@ public class TGrafoDirigido implements IGrafoDirigido {
     }
 
     public Object[] getEtiquetasOrdenado() {
-        TreeMap<Comparable, TVertice> mapOrdenado = new TreeMap<>(this.getVertices());
+        TreeMap<Comparable, IVertice> mapOrdenado = new TreeMap<>(this.getVertices());
         return mapOrdenado.keySet().toArray();
     }
 
     /**
      * @return the vertices
      */
-    public Map<Comparable, TVertice> getVertices() {
+    public Map<Comparable, IVertice> getVertices() {
         return vertices;
     }
 
-    @Override
     public Comparable centroDelGrafo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int n = vertices.size();
+        Comparable[] etiquetas = vertices.keySet().toArray(new Comparable[n]);
+
+        Comparable centro = null;
+        Comparable excentricidadMin = null;
+
+        for (Comparable etiqueta : etiquetas) {
+            Comparable excentricidad = obtenerExcentricidad(etiqueta);
+
+            if (excentricidad != null) {
+                if (excentricidadMin == null || excentricidad.compareTo(excentricidadMin) < 0) {
+                    excentricidadMin = excentricidad;
+                    centro = etiqueta;
+                }
+            }
+        }
+        return centro;
     }
 
     @Override
     public Double[][] floyd() {
-        // Obtener las etiquetas ordenadas para tener un índice consistente
+        int n = this.getVertices().size();
+        Double[][] dist = UtilGrafos.obtenerMatrizCostos(this.getVertices());
+        Object[] etiquetas = this.getVertices().keySet().toArray();
 
-        Object[] etiquetas = getVertices().keySet().toArray();
-        int n = etiquetas.length;
-        Double[][] dist = new Double[n][n];
-
-        // Inicializar la matriz de distancias
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (i == j) {
-                    dist[i][j] = 0.0; // Distancia de un vértice a sí mismo es 0
-                } else {
-                    // Buscar si existe arista directa entre los vértices
-                    Comparable etiquetaOrigen = (Comparable) etiquetas[i];
-                    Comparable etiquetaDestino = (Comparable) etiquetas[j];
-
-                    TVertice verticeOrigen = buscarVertice(etiquetaOrigen);
-
-                    if (verticeOrigen != null) {
-                        TVertice verticeDestino = buscarVertice(etiquetaDestino);
-                        if (verticeDestino != null) {
-                            dist[i][j] = verticeOrigen.obtenerCostoAdyacencia(verticeDestino);
-
-                        } else {
-                            dist[i][j] = Double.MAX_VALUE;
-                        }
-                    } else {
-                        dist[i][j] = Double.MAX_VALUE;
-                    }
-                }
-            }
-        }
-
-        // Algoritmo principal de Floyd-Warshall: k es el vértice intermedio
         for (int k = 0; k < n; k++) {
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
-                    // Si hay un camino más corto pasando por k
-                    if (dist[i][k] != Double.MAX_VALUE &&
-                            dist[k][j] != Double.MAX_VALUE &&
-                            (dist[i][k] + dist[k][j]) < dist[i][j]) {
-
-
-                        double nuevaDistancia = dist[i][k] + dist[k][j];
-
-                        dist[i][j] = nuevaDistancia;
-
+                    if (dist[i][k] != Double.MAX_VALUE && dist[k][j] != Double.MAX_VALUE) {
+                        if (dist[i][j] > dist[i][k] + dist[k][j]) {
+                            dist[i][j] = dist[i][k] + dist[k][j];
+                        }
                     }
                 }
             }
         }
-
         return dist;
     }
 
-    @Override
     public Comparable obtenerExcentricidad(Comparable etiquetaVertice) {
+        int n = vertices.size();
+        Comparable[] etiquetas = vertices.keySet().toArray(new Comparable[n]);
+        int indice = -1;
+
+        // busca el indice del vertice con la etiqueta dada
+        for (int i = 0; i < n; i++) {
+            if (etiquetas[i].equals(etiquetaVertice)) {
+                indice = i;
+            }
+        }
+
+        if (indice == -1) {
+            return null;
+        }
+
+        Double[][] matrizFloyd = floyd();
+        double maxDistancia = -1;
+
+        for (int j = 0; j < n; j++) {
+            Double valor = matrizFloyd[indice][j];
+
+            if (valor != null && !valor.isInfinite() && valor > maxDistancia) {
+                maxDistancia = valor;
+            }
+        }
+
+        if (maxDistancia == -1) {
+            return null;
+        } else {
+            return maxDistancia;
+        }
+    }
+
+    public Collection<IVertice> bpf() {
+        int n = vertices.size();
+        Comparable[] etiquetas = vertices.keySet().toArray(new Comparable[n]);
+        Collection<IVertice> bpfList = new LinkedList<>();
+        this.bpf(etiquetas[0], bpfList);
+        return bpfList;
+    }
+
+
+
+    public Collection<IVertice> bpf(Comparable etiquetaOrigen, Collection<IVertice> bpfList) {
+        buscarVertice(etiquetaOrigen).setVisitado(true);
+        bpfList.add(buscarVertice(etiquetaOrigen));
+
+        Collection<IAdyacencia> adyacentes = buscarVertice(etiquetaOrigen).getAdyacentes();
+        for (IAdyacencia adyacencia : adyacentes) {
+            IVertice w = adyacencia.getDestino();
+            if (!w.getVisitado()) {
+                this.bpf(w.getEtiqueta(), bpfList);
+            }
+        }
+        return bpfList;
+    }
+
+
+
+    public Collection<TVertice> bpf(TVertice vertice) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+
     public boolean[][] warshall() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -215,6 +248,12 @@ public class TGrafoDirigido implements IGrafoDirigido {
     @Override
     public boolean eliminarVertice(Comparable nombreVertice) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void desvisitarVertices() {
+        // TODO Auto-generated method stub
+
     }
 
 }

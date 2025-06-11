@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Collection;
+
 public class PruebaGrafo {
 
     public static void main(String[] args) {
@@ -17,7 +19,11 @@ public class PruebaGrafo {
         }
         System.out.println();
         System.out.println("Centro del grafo: " + gd.centroDelGrafo());
-       
-       
+
+        Collection<IVertice> recorrido = gd.bpf();
+        
+        for(IVertice w : recorrido){
+            System.out.println(w.getEtiqueta());
+        }
     }
 }

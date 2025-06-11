@@ -23,5 +23,5 @@ public interface IArista {
     void setEtiquetaDestino(Comparable etiquetaDestino);
 
     void setEtiquetaOrigen(Comparable etiquetaOrigen);
-    
+
 }
