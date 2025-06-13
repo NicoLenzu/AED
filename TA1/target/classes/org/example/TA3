@@ -1,0 +1,11 @@
+1. aValue = 8933.234;
+2. aValue++;
+3. System.out.println("Hello World!");
+4. Bicycle myBike = new Bicycle();
+
+a) Incremento
+b) Asignación
+c) Creación de objeto
+d) Invocación de método
+
+1-b     2-a     3-d     4-c
