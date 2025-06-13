@@ -93,6 +93,25 @@ public class TVertice<T> implements IVertice {
         }
         return null;
     }
+    public TCaminos todosLosCaminos(Comparable etVertDest, TCamino caminoPrevio, TCaminos
+            todosLosCaminos) {
+        this.setVisitado(true);
+        for (IAdyacencia adyacencia : this.getAdyacentes()) {
+            IVertice destino = adyacencia.getDestino();
+            if (!destino.getVisitado()) {
+                if (destino.getEtiqueta().compareTo(etVertDest) == 0) {
+                    TCamino copia = caminoPrevio.copiar();
+                    copia.agregarAdyacencia((TAdyacencia) adyacencia);
+                    todosLosCaminos.getCaminos().add(copia);
+                } else {
+                    caminoPrevio.agregarAdyacencia((TAdyacencia) adyacencia);
+                    destino.todosLosCaminos(etVertDest,caminoPrevio,todosLosCaminos);
+                }
+            }
+        }
+        this.setVisitado(false);
+        return todosLosCaminos;
+    }
 
     /**
      *

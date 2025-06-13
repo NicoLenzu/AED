@@ -234,7 +234,16 @@ public class TGrafoDirigido implements IGrafoDirigido {
         return bpfList;
     }
 
-
+    public TCaminos todosLosCaminos(Comparable etiquetaOrigen, Comparable etiquetaDestino) {
+        TCaminos todosLosCaminos = new TCaminos();
+        TVertice v = (TVertice) buscarVertice(etiquetaOrigen);
+        if(v != null){
+            TCamino caminoPrevio = new TCamino(v);
+            v.todosLosCaminos(etiquetaDestino, caminoPrevio, todosLosCaminos);
+            return todosLosCaminos;
+        }
+        return null;
+    }
 
     public Collection<TVertice> bpf(TVertice vertice) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

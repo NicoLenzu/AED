@@ -37,5 +37,5 @@ public interface IVertice {
     void setVisitado(boolean valor);
 
 
-
+    public TCaminos todosLosCaminos(Comparable etVertDest, TCamino caminoPrevio, TCaminos todosLosCaminos);
 }
