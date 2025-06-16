@@ -1,12 +1,9 @@
-package uy.edu.ucu.aed;
+package org.example;
 
 /*
  * NO LICENCE 
  * Author: Ing. Agustin Paredes
  */
-
-import java.util.Collection;
-import java.util.LinkedList;
 
 
 /**

@@ -1,6 +1,7 @@
-package uy.edu.ucu.aed;
+package org.example;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class Parcial2
 {    
@@ -9,22 +10,52 @@ public class Parcial2
      */
     public static void main(String[] args)
     {
-        // 1 - Cargar el Grafo
-        TGrafoRedDatos grafo = UtilGrafos.cargarGrafo("src/main/dispositivos.txt", "src/main/conexiones.txt", false, TGrafoRedDatos.class);
+//        // 1 - Cargar el Grafo
+//        TGrafoRedDatos grafo = UtilGrafos.cargarGrafo("src/main/dispositivos.txt", "src/main/conexiones.txt", false, TGrafoRedDatos.class);
+//
+//        // 2 - Verificar que los componentes se encuentren conectados
+//        //boolean conectados = grafo.conectados("nodoX","nodoY");
+//
+//        // 3 - Leer y cargar archivo mediciones.txt
+//        TDato[] datos = Parcial2.cargarMediciones("src/main/mediciones.txt");
+//
+//        // 4 - Obtener dato de mayor medicion.
+//        TMedidor medidor = new TMedidor();
+//        TDato mayorMedicion = medidor.obtenerMayorMedicion(datos);
+//
+//        // 5 - Emitir archivo de salida salida.txt
+//        // COMPLETAR CÓDIGO
+//        // ManejadorArchivosGenerico.escribirArchivo("src/main/java/salida.txt", vector con lineas del archivo);
 
-        // 2 - Verificar que los componentes se encuentren conectados
-        //boolean conectados = grafo.conectados("nodoX","nodoY");
-        
-        // 3 - Leer y cargar archivo mediciones.txt
-        TDato[] datos = Parcial2.cargarMediciones("src/main/mediciones.txt");
-        
-        // 4 - Obtener dato de mayor medicion.
-        TMedidor medidor = new TMedidor();
-        TDato mayorMedicion = medidor.obtenerMayorMedicion(datos);
-        
-        // 5 - Emitir archivo de salida salida.txt
-        // COMPLETAR CÓDIGO
-        // ManejadorArchivosGenerico.escribirArchivo("src/main/java/salida.txt", vector con lineas del archivo);
+        Collection<TVertice> U = new ArrayList<TVertice>();
+        U.add(new TVertice(1));
+        U.add(new TVertice(2));
+        U.add(new TVertice(3));
+        U.add(new TVertice(4));
+        U.add(new TVertice(5));
+        U.add(new TVertice(6));
+
+        TAristas aristas = new TAristas();
+        aristas.add(new TArista(1,2,3));
+        aristas.add(new TArista(1,3,5));
+        aristas.add(new TArista(1,4,1));
+        aristas.add(new TArista(1,5,7));
+        aristas.add(new TArista(1,6,2));
+        aristas.add(new TArista(2,3,1));
+        aristas.add(new TArista(2,4,3));
+        aristas.add(new TArista(2,5,5));
+        aristas.add(new TArista(2,6,6));
+        aristas.add(new TArista(3,4,2));
+        aristas.add(new TArista(3,5,3));
+        aristas.add(new TArista(3,6,5));
+        aristas.add(new TArista(4,5,7));
+        aristas.add(new TArista(4,6,1));
+        aristas.add(new TArista(5,6,4));
+        TGrafoNoDirigido grafoNoDirigido = new TGrafoNoDirigido(U,aristas);
+
+        TGrafoNoDirigido grafoPrim = grafoNoDirigido.Prim();
+
+        UtilGrafos.imprimirMatrizMejorado(UtilGrafos.obtenerMatrizCostos(grafoPrim.getVertices()),grafoPrim.getVertices(),"Grafo Prim");
     }
 
     private static TDato[] cargarMediciones(String rutaAlArchivo) {

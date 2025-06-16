@@ -1,4 +1,4 @@
-package uy.edu.ucu.aed;
+package org.example;
 
 
 /*
@@ -13,13 +13,13 @@ import java.util.Collection;
  *
  * @author agustinp
  */
-public class TGrafoRedDatos /*extends TGrafo*/ implements ITGrafoRedDatos
+public class TGrafoRedDatos extends TGrafoNoDirigido implements ITGrafoRedDatos
 {
 
     public TGrafoRedDatos(Collection<TVertice> vertices, Collection<TArista> aristas)
     {
         // Descomentar la siguiente línea luego de elegir una superclase
-        //super(vertices, aristas);
+        super(vertices, aristas);
     }
 
     @Override

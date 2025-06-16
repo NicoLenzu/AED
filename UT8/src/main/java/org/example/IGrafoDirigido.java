@@ -1,6 +1,5 @@
-package uy.edu.ucu.aed;
+package org.example;
 
-import java.util.Collection;
 import java.util.Map;
 
 public interface IGrafoDirigido {

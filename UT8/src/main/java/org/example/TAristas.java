@@ -1,4 +1,4 @@
-package uy.edu.ucu.aed;
+package org.example;
 
 import java.util.Collection;
 
@@ -18,14 +18,30 @@ public class TAristas extends LinkedList<TArista> {
      * @return
      */
     public TArista buscar(Comparable etOrigen, Comparable etDestino) {
-        TArista tempArista;
+        TArista tempArista = null;
         for (TArista laa : this) {
             if ((laa.getEtiquetaOrigen().equals(etOrigen)) && laa.getEtiquetaDestino().equals(etDestino)) {
-                return laa;
+                tempArista = laa;
             }
         }
 
-        return null;
+        return tempArista;
+    }
+    public TArista buscarMin(Collection<TVertice> U,Collection<TVertice> V ){
+        TArista minArista = null;
+        double minCosto = Double.MAX_VALUE;
+        for (TVertice u : U) {
+            for (TVertice v : V) {
+                TArista tempArista = buscar(u.getEtiqueta(),v.getEtiqueta());
+                if (tempArista != null) {
+                    if (tempArista.getCosto() < minCosto) {
+                        minArista = tempArista;
+                        minCosto = tempArista.getCosto();
+                    }
+                }
+            }
+        }
+        return minArista;
     }
 
     public String imprimirEtiquetas() {

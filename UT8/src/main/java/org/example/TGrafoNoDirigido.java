@@ -1,5 +1,6 @@
-package uy.edu.ucu.aed;
+package org.example;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido 
@@ -31,6 +32,31 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
     public TAristas getLasAristas()
     {
         return lasAristas;
+    }
+
+    public TGrafoNoDirigido Prim() {
+        TAristas aristas = new TAristas();
+        Collection<TVertice> U = new ArrayList<TVertice>();
+        Collection<TVertice> V = getVertices().values();
+        U.add(V.iterator().next());
+
+        while (!V.isEmpty()) {
+            TArista tempArista = this.lasAristas.buscarMin(U,V);
+            if (tempArista != null) {
+                aristas.add(tempArista);
+                aristas.add(tempArista.aristaInversa());
+                if (!V.isEmpty()){
+                for (TVertice v : V) {
+                    if(tempArista.getEtiquetaDestino() == v.getEtiqueta()) {
+                        V.remove(v);
+                        break;
+                    }
+
+                }}
+                U.add(new TVertice(tempArista.getEtiquetaDestino()));
+            }
+        }
+        return (new TGrafoNoDirigido(U, aristas));
     }
 
 }

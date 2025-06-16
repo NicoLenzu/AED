@@ -1,6 +1,3 @@
-package uy.edu.ucu.aed;
-
-import java.util.Collection;
-import java.util.Map;
+package org.example;
 
 public interface IGrafoNoDirigido { }

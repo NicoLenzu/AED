@@ -1,4 +1,4 @@
-package uy.edu.ucu.aed;
+package org.example;
 
 /*
  * NO LICENCE 

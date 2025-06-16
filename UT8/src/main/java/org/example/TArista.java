@@ -1,4 +1,4 @@
-package uy.edu.ucu.aed;
+package org.example;
 
 public class TArista implements IArista {
 
