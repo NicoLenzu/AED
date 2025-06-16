@@ -56,6 +56,12 @@ public class Parcial2
         TGrafoNoDirigido grafoPrim = grafoNoDirigido.Prim();
 
         UtilGrafos.imprimirMatrizMejorado(UtilGrafos.obtenerMatrizCostos(grafoPrim.getVertices()),grafoPrim.getVertices(),"Grafo Prim");
+
+        System.out.println("Recorrido en Amplitud");
+        for(TVertice v : grafoNoDirigido.bfs(1)){
+            System.out.print(v.getEtiqueta()+" -> ");
+        }
+
     }
 
     private static TDato[] cargarMediciones(String rutaAlArchivo) {

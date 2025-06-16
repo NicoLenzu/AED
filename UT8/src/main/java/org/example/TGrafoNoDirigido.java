@@ -1,7 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 
 public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido 
 {
@@ -37,26 +36,54 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
     public TGrafoNoDirigido Prim() {
         TAristas aristas = new TAristas();
         Collection<TVertice> U = new ArrayList<TVertice>();
-        Collection<TVertice> V = getVertices().values();
+        Collection<TVertice> V = new ArrayList<TVertice>();
+        V.addAll(getVertices().values());
         U.add(V.iterator().next());
 
         while (!V.isEmpty()) {
-            TArista tempArista = this.lasAristas.buscarMin(U,V);
+            TArista tempArista = getLasAristas().buscarMin(U,V);
             if (tempArista != null) {
                 aristas.add(tempArista);
                 aristas.add(tempArista.aristaInversa());
-                if (!V.isEmpty()){
                 for (TVertice v : V) {
                     if(tempArista.getEtiquetaDestino() == v.getEtiqueta()) {
                         V.remove(v);
                         break;
                     }
-
-                }}
+                }
                 U.add(new TVertice(tempArista.getEtiquetaDestino()));
             }
         }
         return (new TGrafoNoDirigido(U, aristas));
     }
+    public TGrafoNoDirigido Kruskal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public Collection<TVertice> bfs(Comparable etiquetaOrigen) {
+        if (etiquetaOrigen == null || !getVertices().containsKey(etiquetaOrigen)) {
+            return null;
+        }
+        Collection<TVertice> bfslist = new ArrayList();
+        Queue<TVertice> U = new LinkedList<TVertice>();
+        bfslist.add(getVertices().get(etiquetaOrigen));
+        U.add(getVertices().get(etiquetaOrigen));
+        getVertices().get(etiquetaOrigen).setVisitado(true);
+
+        while (!U.isEmpty()) {
+            TVertice tempVertice = U.poll();
+            for (TAdyacencia ady : tempVertice.getAdyacentes()){
+                if (!ady.getDestino().getVisitado()){
+                ady.getDestino().setVisitado(true);
+                U.add(ady.getDestino());
+                bfslist.add(ady.getDestino());
+                }
+            }
+        }
+        return bfslist;
+    }
+    public Collection<TVertice> dfs(Comparable etiquetaOrigen){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 
 }
