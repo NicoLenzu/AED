@@ -16,7 +16,6 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
     {
         super(vertices, aristas);
         lasAristas.insertarAmbosSentidos(aristas);
-
     }
 
     @Override
@@ -31,6 +30,33 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
     public TAristas getLasAristas()
     {
         return lasAristas;
+    }
+
+    public boolean conectados(Comparable etOrigen, Comparable etDestino){
+        if (etOrigen == null || !getVertices().containsKey(etOrigen) || etDestino == null || !getVertices().containsKey(etDestino)) {
+            return false;
+        }
+        boolean conectados = false;
+        Queue<TVertice> U = new LinkedList<TVertice>();
+        U.add(getVertices().get(etOrigen));
+        getVertices().get(etOrigen).setVisitado(true);
+
+        while (!U.isEmpty()) {
+            TVertice tempVertice = U.poll();
+            for (TAdyacencia ady : tempVertice.getAdyacentes()){
+                if (!ady.getDestino().getVisitado()){
+                    if (ady.getDestino().getEtiqueta().equals(etDestino)){
+                        return true;
+                    }
+                    ady.getDestino().setVisitado(true);
+                    U.add(ady.getDestino());
+
+                }
+            }
+        }
+        desvisitarVertices();
+        return conectados;
+
     }
 
     public TGrafoNoDirigido Prim() {
@@ -57,8 +83,35 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
         return (new TGrafoNoDirigido(U, aristas));
     }
     public TGrafoNoDirigido Kruskal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getLasAristas().ordenarPorCosto();
+        Collection<TVertice> V = new ArrayList<TVertice>();
+        V.addAll(getVertices().values());
+        int n = V.size();
+        TGrafoNoDirigido grafoKruskal = new TGrafoNoDirigido(new ArrayList<>(), new ArrayList<>());
+        while (!V.isEmpty()) {
+            for(TArista arista : getLasAristas()){
+                if (!grafoKruskal.conectados(arista.getEtiquetaOrigen(), arista.getEtiquetaDestino()) && !grafoKruskal.conectados(arista.getEtiquetaDestino(), arista.getEtiquetaOrigen())) {
+
+                    grafoKruskal.insertarArista(arista);
+                    grafoKruskal.getLasAristas().add(arista);
+                    grafoKruskal.insertarVertice(arista.getEtiquetaOrigen());
+                    grafoKruskal.insertarVertice(arista.getEtiquetaDestino());
+                    for (TVertice v : V) {
+                        if(arista.getEtiquetaDestino() == v.getEtiqueta() || arista.getEtiquetaOrigen() == v.getEtiqueta()) {
+                            V.remove(v);
+                            break;
+                        }
+                    }
+                    if ((grafoKruskal.getLasAristas().size()) == (n-1)*2) {
+                        return grafoKruskal;
+
+                    }
+                }
+            }
+        }
+        return grafoKruskal;
     }
+
     public Collection<TVertice> bfs(Comparable etiquetaOrigen) {
         if (etiquetaOrigen == null || !getVertices().containsKey(etiquetaOrigen)) {
             return null;
@@ -79,6 +132,7 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
                 }
             }
         }
+        desvisitarVertices();
         return bfslist;
     }
     public Collection<TVertice> dfs(Comparable etiquetaOrigen){

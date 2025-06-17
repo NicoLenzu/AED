@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.Collection;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 
 public class TAristas extends LinkedList<TArista> {
@@ -60,6 +61,9 @@ public class TAristas extends LinkedList<TArista> {
             this.add(ta);
             this.add(ta.aristaInversa());
         }
+    }
+    public void ordenarPorCosto() {
+        this.sort(Comparator.comparingDouble(TArista::getCosto));
     }
 
 }

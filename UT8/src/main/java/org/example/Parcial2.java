@@ -56,11 +56,17 @@ public class Parcial2
         TGrafoNoDirigido grafoPrim = grafoNoDirigido.Prim();
 
         UtilGrafos.imprimirMatrizMejorado(UtilGrafos.obtenerMatrizCostos(grafoPrim.getVertices()),grafoPrim.getVertices(),"Grafo Prim");
+        TGrafoNoDirigido grafoKruskal = grafoNoDirigido.Kruskal();
+
+        UtilGrafos.imprimirMatrizMejorado(UtilGrafos.obtenerMatrizCostos(grafoKruskal.getVertices()),grafoKruskal.getVertices(),"Grafo Kruskal");
+
 
         System.out.println("Recorrido en Amplitud");
         for(TVertice v : grafoNoDirigido.bfs(1)){
             System.out.print(v.getEtiqueta()+" -> ");
         }
+        System.out.println(grafoNoDirigido.conectados(1,6));
+        System.out.println(grafoNoDirigido.conectados(6,1));
 
     }
 

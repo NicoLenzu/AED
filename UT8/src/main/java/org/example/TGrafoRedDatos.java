@@ -23,7 +23,7 @@ public class TGrafoRedDatos extends TGrafoNoDirigido implements ITGrafoRedDatos
     }
 
     @Override
-    public boolean conectados(Comparable a, Comparable b)
+    public boolean conectados(Comparable etOrigen, Comparable b)
     {
         throw new UnsupportedOperationException("Método no implementado :(");
     }
