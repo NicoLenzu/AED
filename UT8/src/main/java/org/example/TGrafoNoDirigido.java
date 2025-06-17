@@ -136,7 +136,26 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
         return bfslist;
     }
     public Collection<TVertice> dfs(Comparable etiquetaOrigen){
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (etiquetaOrigen == null || !getVertices().containsKey(etiquetaOrigen)) {
+            return null;
+        }
+        Collection<TVertice> dfslist = new ArrayList();
+        Stack<TVertice> U = new Stack<>();
+        TVertice tempVertice = getVertices().get(etiquetaOrigen);
+        dfslist.add(tempVertice);
+        U.push(tempVertice);
+        getVertices().get(etiquetaOrigen).setVisitado(true);
+        while (!U.isEmpty()) {
+            tempVertice = U.pop();
+            for (TAdyacencia ady : tempVertice.getAdyacentes()){
+                if (!ady.getDestino().getVisitado()){
+                    ady.getDestino().setVisitado(true);
+                    U.add(ady.getDestino());
+                    dfslist.add(ady.getDestino());
+                }
+            }
+        }
+        return dfslist;
     }
 
 

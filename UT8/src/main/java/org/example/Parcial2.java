@@ -65,6 +65,10 @@ public class Parcial2
         for(TVertice v : grafoNoDirigido.bfs(1)){
             System.out.print(v.getEtiqueta()+" -> ");
         }
+        System.out.println("Recorrido en Profundidad");
+        for(TVertice v : grafoNoDirigido.dfs(1)){
+            System.out.print(v.getEtiqueta()+" -> ");
+        }
         System.out.println(grafoNoDirigido.conectados(1,6));
         System.out.println(grafoNoDirigido.conectados(6,1));
 
