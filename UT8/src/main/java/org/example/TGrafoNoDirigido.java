@@ -46,6 +46,7 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
             for (TAdyacencia ady : tempVertice.getAdyacentes()){
                 if (!ady.getDestino().getVisitado()){
                     if (ady.getDestino().getEtiqueta().equals(etDestino)){
+                        desvisitarVertices();
                         return true;
                     }
                     ady.getDestino().setVisitado(true);
@@ -90,10 +91,11 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
         TGrafoNoDirigido grafoKruskal = new TGrafoNoDirigido(new ArrayList<>(), new ArrayList<>());
         while (!V.isEmpty()) {
             for(TArista arista : getLasAristas()){
-                if (!grafoKruskal.conectados(arista.getEtiquetaOrigen(), arista.getEtiquetaDestino()) && !grafoKruskal.conectados(arista.getEtiquetaDestino(), arista.getEtiquetaOrigen())) {
+                if (!grafoKruskal.conectados(arista.getEtiquetaOrigen(), arista.getEtiquetaDestino()) ) {
 
-                    grafoKruskal.insertarArista(arista);
                     grafoKruskal.getLasAristas().add(arista);
+                    grafoKruskal.insertarArista(arista);
+
                     grafoKruskal.insertarVertice(arista.getEtiquetaOrigen());
                     grafoKruskal.insertarVertice(arista.getEtiquetaDestino());
                     for (TVertice v : V) {
@@ -126,9 +128,9 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
             TVertice tempVertice = U.poll();
             for (TAdyacencia ady : tempVertice.getAdyacentes()){
                 if (!ady.getDestino().getVisitado()){
-                ady.getDestino().setVisitado(true);
-                U.add(ady.getDestino());
-                bfslist.add(ady.getDestino());
+                    bfslist.add(ady.getDestino());
+                    U.add(ady.getDestino());
+                    ady.getDestino().setVisitado(true);
                 }
             }
         }
@@ -139,24 +141,30 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido
         if (etiquetaOrigen == null || !getVertices().containsKey(etiquetaOrigen)) {
             return null;
         }
-        Collection<TVertice> dfslist = new ArrayList();
-        Stack<TVertice> U = new Stack<>();
-        TVertice tempVertice = getVertices().get(etiquetaOrigen);
-        dfslist.add(tempVertice);
-        U.push(tempVertice);
-        getVertices().get(etiquetaOrigen).setVisitado(true);
-        while (!U.isEmpty()) {
-            tempVertice = U.pop();
-            for (TAdyacencia ady : tempVertice.getAdyacentes()){
-                if (!ady.getDestino().getVisitado()){
-                    ady.getDestino().setVisitado(true);
-                    U.add(ady.getDestino());
-                    dfslist.add(ady.getDestino());
+
+        Collection<TVertice> dfslist = new ArrayList<>();
+        Stack<TVertice> stack = new Stack<>();
+
+        TVertice origen = getVertices().get(etiquetaOrigen);
+        origen.setVisitado(true);
+        stack.push(origen);
+
+        while (!stack.isEmpty()) {
+            TVertice actual = stack.pop();
+            dfslist.add(actual);
+
+            for (TAdyacencia ady : actual.getAdyacentes()) {
+                TVertice vecino = ady.getDestino();
+                if (!vecino.getVisitado()) {
+                    vecino.setVisitado(true);
+                    stack.push(vecino);
                 }
             }
         }
+
         return dfslist;
     }
+
 
 
 }

@@ -62,11 +62,11 @@ public class Parcial2
 
 
         System.out.println("Recorrido en Amplitud");
-        for(TVertice v : grafoNoDirigido.bfs(1)){
+        for(TVertice v : grafoPrim.bfs(1)){
             System.out.print(v.getEtiqueta()+" -> ");
         }
         System.out.println("Recorrido en Profundidad");
-        for(TVertice v : grafoNoDirigido.dfs(1)){
+        for(TVertice v : grafoKruskal.dfs(1)){
             System.out.print(v.getEtiqueta()+" -> ");
         }
         System.out.println(grafoNoDirigido.conectados(1,6));
